@@ -58,8 +58,7 @@
 	// ============================================================================
    function buildImageCompose(app, imagesFolder, duration,count) {
          defaultFolder = imagesFolder;
-		var panZoomStart = 0; // in seconds
-         var panZoomEnd = duration/count;
+         panZoomEnd = duration/count;
 		app.beginUndoGroup("PanZoom.jsx");
 		var assetFolder = app.project.items.addFolder("PanZoom Assets  - " + File.decode(imagesFolder));
 		var comps = [];
@@ -234,7 +233,8 @@
 	// Main Script
 	// ============================================================================
 	app.beginUndoGroup("Start...");
-
+	var panZoomStart = 0; // in seconds
+    var panZoomEnd = 3;
     var defaultFolder;
     if (defaultFolder == null)
     {
@@ -247,6 +247,8 @@
     }
     var dateStr  = date.getFullYear().toString ()+month+date.getDate().toString ()
     path = "d:\\Project\\AE\\sources\\"+dateStr
+    var imageFolder = new Folder(path);
+    alert("compose path:" +path);
     // prepare layers
 	var actiItem = app.project.activeItem;
     var duration = getAudioLength(path+"\\mp3.mp3");
@@ -258,7 +260,7 @@
 	}
     """
     actiItem = buildImageCompose(app,imageFolder,duration,8)
-    var imageFolder = new Folder(path);
+    
 	var layers = actiItem.layers;
      
 	// Open lrc file
