@@ -64,8 +64,7 @@
 		var comps = [];
 		var files = imagesFolder.getFiles();
 		clearOutput();
-        
-        
+
          //var count = duration/(panZoomEnd-panZoomStart);
          
 		alert("count:" +count);
@@ -213,6 +212,9 @@
         return isInArray(imageFormats, ext);
     }
 
+    // ============================================================================
+	// 使用Mplayer 获取视频时长
+	// ============================================================================
     function getAudioLength(filepath){
         var command = "mplayer  -vo null -ao null -frames 0 -identify \"" + filepath +"\"" ;
         var duration = system.callSystem(command);
@@ -248,23 +250,12 @@
     var dateStr  = date.getFullYear().toString ()+month+date.getDate().toString ()
     path = "d:\\Project\\AE\\sources\\"+dateStr
     var imageFolder = new Folder(path);
-    alert("compose path:" +path);
+
     // prepare layers
-	var actiItem = app.project.activeItem;
+    var actiItem = app.project.activeItem;
     var duration = getAudioLength(path+"\\mp3.mp3");
-    """
-	if(actiItem == null || !(actiItem instanceof CompItem)) {
-      
-		actiItem = app.project.items.addComp('Lrc2AE',1920,1080,1,duration,25);
-		alert("New Comp created");
-	}
-    """
     actiItem = buildImageCompose(app,imageFolder,duration,8)
-    
 	var layers = actiItem.layers;
-     
-	// Open lrc file
-	//var lrc_file = File.openDialog("select lrc file","*lrc");
     var  lrc_file = new File(path+"\\lrc.lrc");
     
     //import mp3 file
@@ -275,12 +266,8 @@
    
 	var lrc_line = "";
 	var text_obj = layers.addNull();
-    """
-     var img_obj = layers.addNull();
-     addImg(layers,path,duration,img_obj,8);
-    """
 
-	text_obj.name = "Imported with Lrc2AE";
+	text_obj.name = "Imported with SlideCreator";
 	if(lrc_file.exists) {
 		lrc_file.open("r","TEXT","????");
 		while(!(lrc_file.eof)) {
