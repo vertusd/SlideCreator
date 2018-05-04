@@ -243,6 +243,7 @@
     if (month >= 1 && month <= 9) {
         month = "0" + month;
     }
+
     var dateStr  = date.getFullYear().toString ()+month+date.getDate().toString ()
     path = "d:\\Project\\AE\\sources\\"+dateStr
     var imageFolder = new Folder(path);
@@ -272,15 +273,28 @@
             lrc_line = lrc_file.readln();
             // line operation
             if (!is_empty_line(lrc_line)) {
+                var markerIn = new MarkerValue("IN");
+                var markerOut = new MarkerValue("OUT");
                 text_obj.outPoint = extract_time(lrc_line);     // outPoint of last layer
+              
+                text_obj.property("Marker").setValueAtTime(text_obj.outPoint,markerOut);
+                text_obj.Transform.Opacity.setValueAtTime(text_obj.outPoint-0.5,100);
+                text_obj.Transform.Opacity.setValueAtTime(text_obj.outPoint,0);
+        
                 text_obj = layers.addText(extract_text(lrc_line));
-                text_obj.startTime = 0;
+                //text_obj.startTime = 0;
+       
                 text_obj.inPoint = extract_time(lrc_line);      // inPoint of current layer
+                text_obj.property("Marker").setValueAtTime(text_obj.inPoint,markerIn);
+
+                text_obj.Transform.Opacity.setValueAtTime(text_obj.inPoint-0.5,0);
+                text_obj.Transform.Opacity.setValueAtTime(text_obj.inPoint,100);
             }
         }
     }
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
     layers.add(mp3FootageItem);
+    app.project.save(new File(path + '/' + dateStr + ".aep"));
     $.writeln("Completed!");
     app.endUndoGroup();
 }
