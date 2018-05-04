@@ -67,7 +67,7 @@
 
          //var count = duration/(panZoomEnd-panZoomStart);
          
-        writeLn("count:" +count);
+        $.writeln("count:" +count);
         for (var i = 0; i < count; i++)
         {
             if (isImageFile(files[i].fsName))
@@ -93,7 +93,7 @@
                 if (item)
                 {
                     item.selected = false;
-                    writeLn((i+1) + "/" + files.length + ": " + item.name);
+                    $.writeln((i+1) + "/" + files.length + ": " + item.name);
                     var comp = app.project.items.addComp(item.name,item.width,item.height,item.pixelAspect,panZoomEnd-panZoomStart,25);
                     var layer = comp.layers.add(item);
                     createPanZoom(comp,layer);
@@ -115,7 +115,7 @@
             
             for (var i = 0; i < comps.length; i++)
             {
-                writeLn("Final Comp, Layer: " + (i+1) + "/" + comps.length);
+                $.writeln("Final Comp, Layer: " + (i+1) + "/" + comps.length);
 
                 var layer = finalComp.layers.add(comps[i]);
 
@@ -139,7 +139,7 @@
         if (assetFolder.numItems < 1)
             assetFolder.remove();
 
-        writeLn("Done !");
+        $.writeln("Done Image Compose !");
         app.endUndoGroup();
         return finalComp
         
@@ -219,7 +219,7 @@
         } else {
             result = "";
         }
-        writeLn(result);
+        $.writeln(result);
          
         return result;
        }
@@ -281,6 +281,6 @@
     }
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
     layers.add(mp3FootageItem);
-    writeLn("Completed!");
+    $.writeln("Completed!");
     app.endUndoGroup();
 }
