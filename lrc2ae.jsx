@@ -1,4 +1,5 @@
 ﻿ {
+    #include "transverter.js" 
     // ============================================================================
     // File:    Lrc2AE.jsx
     // Description:
@@ -21,6 +22,12 @@
     function extract_text(lrc_line) {
         var patt_tag = /\[[0-9.:]+\]/g;
         var text_line = lrc_line.replace(patt_tag, "");
+
+        text_line = transverter({
+					type:'traditional',
+					str:text_line,
+					language:"zh_TW"
+				});
         return(text_line);
     }
 
@@ -210,6 +217,11 @@
     {
         var layers = actiItem.layers;
         var width = Math.floor(title_text.length / 3);
+        title_text = transverter({
+            type:'traditional',
+            str:title_text,
+            language:"zh_TW"
+        });
         var text  = toVerticalText(title_text,false,width);
         var temp_obj = layers.addText(text);
         temp_obj.name = "Imported with SlideCreator Title";
@@ -218,13 +230,13 @@
         var textDocument = textProp.value;
          if (is_title)
         {
-              textDocument.fontSize = Math.floor(100/width) ;
+               textDocument.fontSize = Math.floor(180/width) ;
                textDocument.font = "FZYTK--GBK1-0";
         }
          else
          {
               textDocument.fontSize = 60 ;
-               textDocument.font = "HYi2gj";
+               textDocument.font = "chenwixun-fan";
          }
        
         textDocument.fillColor = [1,1,1];
@@ -386,7 +398,7 @@
                 textDocument.fillColor = [1,1,1];
                 textDocument.strokeColor = [0, 0, 0];
                 textDocument.strokeWidth = 4;
-                textDocument.font = "HYi2gj"; 
+                textDocument.font = "chenwixun-fan"; 
                 textProp.setValue(textDocument);
                 text_obj.property("Source Text").setValue(textDocument);
             }
