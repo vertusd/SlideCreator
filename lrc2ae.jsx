@@ -38,9 +38,15 @@
         
         var patt = /[0-9]+/g;
         var result = lrc_line.match(patt);
+        var value = 0;
+        if (result[2] >100){
+            value = result[2]/1000;
+        }else{
+            value = result[2]/100;
+        }
         var time = parseFloat(result[0]) * 60
                  + parseFloat(result[1])
-                 + parseFloat(result[2])/100;
+                 + value;
         return time;
     }
     // ============================================================================
@@ -230,8 +236,11 @@
         var textDocument = textProp.value;
          if (is_title)
         {
+
                textDocument.fontSize = Math.floor(180/width) ;
                textDocument.font = "FZYTK--GBK1-0";
+
+
         }
          else
          {
@@ -345,8 +354,8 @@
         month = "0" + month;
     }
 
-    var dateStr  = date.getFullYear().toString ()+month+date.getDate().toString ()
-    path = "d:\\Project\\AE\\sources\\"+dateStr
+    var dateStr  = date.getFullYear().toString ()+month+date.getDate().toString ()+"_02";
+    path = "d:\\Project\\AE\\sources\\"+dateStr;
     var imageFolder = new Folder(path);
 
     // prepare layers
@@ -384,7 +393,7 @@
                 //new layer
                 text_obj.locked = true;
                 text_obj = layers.addText(extract_text(lrc_line));
-                //text_obj.startTime = 0;
+                text_obj.startTime = 0;
                 text_obj.inPoint = extract_time(lrc_line);      // inPoint of current layer
                 text_obj.property("Marker").setValueAtTime(text_obj.inPoint,markerIn);
                 text_obj.Transform.Opacity.setValueAtTime(text_obj.inPoint,0);
@@ -393,12 +402,17 @@
                 text_obj.Transform.Position.setValue(value);
                 var textProp = text_obj.property("Source Text");
                 var textDocument = textProp.value;
-
+                textDocument.resetCharStyle();
                 textDocument.fontSize = 60;
                 textDocument.fillColor = [1,1,1];
                 textDocument.strokeColor = [0, 0, 0];
-                textDocument.strokeWidth = 4;
                 textDocument.font = "chenwixun-fan"; 
+                textDocument.strokeWidth = 2;
+                textDocument.strokeOverFill = false;
+                textDocument.applyStroke = true;
+                textDocument.applyFill = true;
+                textDocument.font = "HYi2gj"; 
+
                 textProp.setValue(textDocument);
                 text_obj.property("Source Text").setValue(textDocument);
             }
@@ -407,9 +421,9 @@
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
 
 
-    var title_text = "等你下课";
+    var title_text = "梦中的哈德森";
     addTitleText(actiItem,title_text,true);
-    var author_text = "宋冬野"
+    var author_text = "赵雷"
     addTitleText(actiItem,author_text,false);
 
 
