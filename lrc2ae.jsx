@@ -316,11 +316,11 @@
                 text_obj.Transform.Position.setValue(value);
                 var textProp = text_obj.property("Source Text");
                 var textDocument = textProp.value;
-                textDocument.fontSize = 60;
-                textDocument.fillColor = [1, 0, 0];
-                textDocument.strokeColor = [0, 1, 0];
-                textDocument.strokeWidth = 2;
-                textDocument.font = "华文琥珀";
+                textDocument.fontSize = 80;
+                textDocument.fillColor = [1,1,1];
+                textDocument.strokeColor = [0, 0, 0];
+                textDocument.strokeWidth = 4;
+                textDocument.font = "HYi2gj"; 
                 textProp.setValue(textDocument);
                 text_obj.property("Source Text").setValue(textDocument);
             }
