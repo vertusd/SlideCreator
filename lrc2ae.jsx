@@ -209,7 +209,7 @@
     // 使用Mplayer 获取视频时长
     // ============================================================================
     function getAudioLength(filepath){
-        var command = "mplayer  -vo null -ao null -frames 0 -identify \"" + filepath +"\"" ;
+        var command = "mplayer -vo null -ao null -frames 0 -identify \"" + filepath +"\"" ;
         var duration = system.callSystem(command);
         var myregexp = /ID_LENGTH=([0-9]+)\.00/i;
         var match = myregexp.exec(duration);
@@ -252,7 +252,7 @@
     var actiItem = app.project.activeItem;
     
     var duration = getAudioLength(path+"\\mp3.mp3");
-    actiItem = buildImageCompose(app,imageFolder,duration,8)
+    actiItem = buildImageCompose(app,imageFolder,duration,4)
     var layers = actiItem.layers;
     var  lrc_file = new File(path+"\\lrc.lrc");
     
@@ -261,7 +261,7 @@
     if (io.canImportAs(ImportAsType.FOOTAGE));
        io.importAs = ImportAsType.FOOTAGE;
     var mp3FootageItem = app.project.importFile(io);
-   
+    layers.add(mp3FootageItem);
     var lrc_line = "";
     var text_obj = layers.addNull();
 
@@ -276,24 +276,32 @@
                 var markerIn = new MarkerValue("IN");
                 var markerOut = new MarkerValue("OUT");
                 text_obj.outPoint = extract_time(lrc_line);     // outPoint of last layer
-              
                 text_obj.property("Marker").setValueAtTime(text_obj.outPoint,markerOut);
                 text_obj.Transform.Opacity.setValueAtTime(text_obj.outPoint-0.5,100);
                 text_obj.Transform.Opacity.setValueAtTime(text_obj.outPoint,0);
-        
+                //new layer
                 text_obj = layers.addText(extract_text(lrc_line));
                 //text_obj.startTime = 0;
-       
                 text_obj.inPoint = extract_time(lrc_line);      // inPoint of current layer
                 text_obj.property("Marker").setValueAtTime(text_obj.inPoint,markerIn);
-
-                text_obj.Transform.Opacity.setValueAtTime(text_obj.inPoint-0.5,0);
-                text_obj.Transform.Opacity.setValueAtTime(text_obj.inPoint,100);
+                text_obj.Transform.Opacity.setValueAtTime(text_obj.inPoint,0);
+                text_obj.Transform.Opacity.setValueAtTime(text_obj.inPoint+0.5,100);
+                var value = [100,1000,0]
+                text_obj.Transform.Position.setValue(value);
+                var textProp = text_obj.property("Source Text");
+                var textDocument = textProp.value;
+                textDocument.fontSize = 60;
+                textDocument.fillColor = [1, 0, 0];
+                textDocument.strokeColor = [0, 1, 0];
+                textDocument.strokeWidth = 2;
+                textDocument.font = "华文琥珀";
+                textProp.setValue(textDocument);
+                text_obj.property("Source Text").setValue(textDocument);
             }
         }
     }
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
-    layers.add(mp3FootageItem);
+   
     app.project.save(new File(path + '/' + dateStr + ".aep"));
     $.writeln("Completed!");
     app.endUndoGroup();
