@@ -279,6 +279,7 @@
                 text_obj.property("Marker").setValueAtTime(text_obj.outPoint,markerOut);
                 text_obj.Transform.Opacity.setValueAtTime(text_obj.outPoint-0.5,100);
                 text_obj.Transform.Opacity.setValueAtTime(text_obj.outPoint,0);
+                text_obj.locked = true;
                 //new layer
                 text_obj = layers.addText(extract_text(lrc_line));
                 //text_obj.startTime = 0;
@@ -301,7 +302,7 @@
         }
     }
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
-   
+    text_obj.locked = true;
     app.project.save(new File(path + '/' + dateStr + ".aep"));
     $.writeln("Completed!");
     app.endUndoGroup();
