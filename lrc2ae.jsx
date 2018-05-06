@@ -305,6 +305,7 @@
                 text_obj.Transform.Opacity.setValueAtTime(text_obj.outPoint-0.5,100);
                 text_obj.Transform.Opacity.setValueAtTime(text_obj.outPoint,0);
                 //new layer
+                text_obj.locked = true;
                 text_obj = layers.addText(extract_text(lrc_line));
                 //text_obj.startTime = 0;
                 text_obj.inPoint = extract_time(lrc_line);      // inPoint of current layer
