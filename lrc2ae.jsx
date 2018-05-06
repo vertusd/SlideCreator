@@ -225,6 +225,29 @@
        }
 
     // ============================================================================
+    // 添加音乐频谱
+    // ============================================================================
+    function addMusicWave(layers,mp3LayerIndex){
+     //add music wave layer
+    var color = [255,255,255]
+    var wave_layer = layers.addSolid(color,"wave",1920,1080,1,duration);
+    wave_layer.Effects.addProperty("ADBE AudSpect");
+    var wave =  wave_layer.property("ADBE Effect Parade").property("ADBE AudSpect");
+    var waveLayerPosition = [960,20,0];
+    var wavePositionS = [960,540];
+    var wavePositionE = [1900,540];
+    wave.property("ADBE AudSpect-0001").setValue(mp3LayerIndex);
+    wave.property("ADBE AudSpect-0002").setValue(wavePositionS);
+    wave.property("ADBE AudSpect-0003").setValue(wavePositionE);
+    wave.property("ADBE AudSpect-0009").setValue(8000);
+    wave.property("ADBE AudSpect-0012").setValue(6);
+    wave.property("ADBE AudSpect-0014").setValue(color);
+    wave.property("ADBE AudSpect-0015").setValue(color);
+    wave.property("ADBE AudSpect-0021").setValue(2);
+    wave_layer.Transform.Position.setValue(waveLayerPosition);
+    }
+
+    // ============================================================================
     // Main Script
     // ============================================================================
     //强制关闭未保存项目    
@@ -261,7 +284,9 @@
     if (io.canImportAs(ImportAsType.FOOTAGE));
        io.importAs = ImportAsType.FOOTAGE;
     var mp3FootageItem = app.project.importFile(io);
-    layers.add(mp3FootageItem);
+    mp3Layer = layers.add(mp3FootageItem);
+    
+    //add text
     var lrc_line = "";
     var text_obj = layers.addNull();
 
@@ -301,7 +326,8 @@
         }
     }
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
-   
+    addMusicWave(layers,mp3Layer.index+1);
+    
     app.project.save(new File(path + '/' + dateStr + ".aep"));
     $.writeln("Completed!");
     app.endUndoGroup();
