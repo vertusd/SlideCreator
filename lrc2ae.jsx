@@ -53,6 +53,7 @@
         }
     }
 
+   
     // ============================================================================
     // Function: add image with animation
     // ============================================================================
@@ -204,7 +205,71 @@
         var imageFormats = ["BMP", "CIN", "IIF", "EXR", "GIF", "JPG", "JPEG", "PCX", "PCT", "PNG", "PSD", "PXR", "HDR", "SGI", "TIF", "TGA"]; 
         return isInArray(imageFormats, ext);
     }
+    
+    function addTitleText(actiItem,title_text,is_title) 
+    {
+        var layers = actiItem.layers;
+        var width = Math.floor(title_text.length / 3);
+        var text  = toVerticalText(title_text,false,width);
+        var temp_obj = layers.addText(text);
+        temp_obj.name = "Imported with SlideCreator Title";
 
+        var textProp = temp_obj.property("Source Text");
+        var textDocument = textProp.value;
+         if (is_title)
+        {
+              textDocument.fontSize = Math.floor(100/width) ;
+               textDocument.font = "FZYTK--GBK1-0";
+        }
+         else
+         {
+              textDocument.fontSize = 60 ;
+               textDocument.font = "HYi2gj";
+         }
+       
+        textDocument.fillColor = [1, 0, 0];
+        textDocument.strokeColor = [0, 1, 0];
+        textDocument.strokeWidth = 2;
+       
+        textProp.setValue(textDocument);
+        var myRect = temp_obj.sourceRectAtTime(0,false);
+        if (is_title)
+        {
+            var myPos = temp_obj.property("Position").value - myRect.width ;
+         }
+         else
+         {
+             var myPos = temp_obj.property("Position").value + myRect.width ;
+          }
+        
+        var myY = myPos[1] + myRect.top + myRect.height/2;
+        var deltaY = actiItem.height/2 - myY;
+        temp_obj.property("Position").setValue(myPos + [0,deltaY]);
+    }
+    
+    
+    function toVerticalText(text , single, width)
+    {
+
+        array = {};
+        resulttxt  = "";
+       
+       
+        if (width == 0 || single ==true)
+        {
+            width = 1;
+        }
+        $.writeln("width:" + width );
+        for(i =0 ;i<text.length ;i++){
+             resulttxt += text[i];
+             if ((i+1) % width ==0 )
+             {
+                 resulttxt += "\n";
+             }          
+        }
+        $.writeln(resulttxt); 
+        return resulttxt
+     }
     // ============================================================================
     // 使用Mplayer 获取视频时长
     // ============================================================================
@@ -256,6 +321,7 @@
     app.beginUndoGroup("Start...");
     var panZoomStart = 0; // in seconds
     var panZoomEnd = 3;
+
     var defaultFolder;
     if (defaultFolder == null)
     {
@@ -289,7 +355,6 @@
     //add text
     var lrc_line = "";
     var text_obj = layers.addNull();
-
     text_obj.name = "Imported with SlideCreator";
     if(lrc_file.exists) {
         lrc_file.open("r","TEXT","????");
@@ -320,13 +385,24 @@
                 textDocument.fillColor = [1, 0, 0];
                 textDocument.strokeColor = [0, 1, 0];
                 textDocument.strokeWidth = 2;
-                textDocument.font = "华文琥珀";
+                textDocument.font = "HYi2gj";
+                //textDocument.fontFamily = "HanYiXiXingKaiJian-Regular";
                 textProp.setValue(textDocument);
                 text_obj.property("Source Text").setValue(textDocument);
             }
         }
     }
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
+
+
+    var title_text = "等你下课";
+    addTitleText(actiItem,title_text,true);
+    var author_text = "宋冬野"
+    addTitleText(actiItem,author_text,false);
+
+
+    
+    
     addMusicWave(layers,mp3Layer.index+1);
     
     app.project.save(new File(path + '/' + dateStr + ".aep"));
