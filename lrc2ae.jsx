@@ -22,12 +22,13 @@
     function extract_text(lrc_line) {
         var patt_tag = /\[[0-9.:]+\]/g;
         var text_line = lrc_line.replace(patt_tag, "");
-
+        """
         text_line = transverter({
 					type:'traditional',
 					str:text_line,
 					language:"zh_TW"
 				});
+        """
         return(text_line);
     }
 
@@ -222,7 +223,7 @@
     function addTitleText(actiItem,title_text,is_title) 
     {
         var layers = actiItem.layers;
-        var width = Math.floor(title_text.length / 3);
+        var width = Math.floor(title_text.length / 2);
         title_text = transverter({
             type:'traditional',
             str:title_text,
@@ -274,22 +275,39 @@
 
         array = {};
         resulttxt  = "";
+        verticaltxt = "";
        
-       
-        if (width == 0 || single ==true)
+        if (width <= 0 || single ==true)
         {
             width = 1;
         }
         $.writeln("width:" + width );
         for(i =0 ;i<text.length ;i++){
              resulttxt += text[i];
-             if ((i+1) % width ==0 )
+             if ((i+1) % (width) ==0 )
              {
                  resulttxt += "\n";
              }          
         }
-        $.writeln(resulttxt); 
-        return resulttxt
+         $.writeln("resulttxt:" + resulttxt );
+        for(i = 0;i <width;i++)
+        {    
+           // $.writeln("i:" + i );
+            res_array = resulttxt.split("\n");
+            for(j = 0;j <res_array.length;j++) 
+            {   
+               $.writeln("line:" +res_array[j] );
+               if(res_array[j][i])
+               {
+                   verticaltxt+= res_array[j][i];
+               }
+               
+               
+            }
+             verticaltxt+="\n";
+        }
+        $.writeln(verticaltxt); 
+        return verticaltxt
      }
     // ============================================================================
     // 使用Mplayer 获取视频时长
@@ -410,7 +428,7 @@
                 textDocument.strokeWidth = 2;
                 textDocument.strokeOverFill = false;
                 textDocument.applyStroke = true;
-                textDocument.applyFill = true;
+                //textDocument.applyFill = true;
                 textDocument.font = "HYi2gj"; 
 
                 textProp.setValue(textDocument);
@@ -421,7 +439,7 @@
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
 
 
-    var title_text = "梦中的哈德森";
+    var title_text = "梦中的哈德森啊";
     addTitleText(actiItem,title_text,true);
     var author_text = "赵雷"
     addTitleText(actiItem,author_text,false);
