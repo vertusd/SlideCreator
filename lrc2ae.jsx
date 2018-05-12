@@ -1,5 +1,6 @@
 ﻿ {
     #include "transverter.js" 
+    #include "MoiveObject.js"
     // ============================================================================
     // File:    Lrc2AE.jsx
     // Description:
@@ -355,6 +356,20 @@
     // Main Script
     // ============================================================================
     //强制关闭未保存项目    
+    
+    var file = new File("D:\\Project\\AE\\SlideCreator\\test.json");
+    var movie  = null;
+    if(file.open("r")){
+       file.encoding = "UTF-8";
+       var myjson =file.read();
+       var movie = JSON.parse(myjson);
+       file.close();
+    }
+    alert(movie.slides[0].components[0].text);
+ 
+    
+    
+    
     app.project.close(CloseOptions.DO_NOT_SAVE_CHANGES)
     app.newProject()
     app.beginUndoGroup("Start...");

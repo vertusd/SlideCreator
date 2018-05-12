@@ -1,0 +1,111 @@
+{
+  "slides": [
+    {
+      "components": [
+        {
+          "TextBox": {},
+          "x": 60,
+          "y": 967,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "text": "<font style=\"\" color=\"#eeeeee\"><font face=\"chenwixun-fan, sans-serif\">字幕字</font><font face=\"FZHei-B01, sans-serif\">幕</font><font face=\"chenwixun-fan, sans-serif\">转换之后行不行啊，好丑</font></font><br>",
+          "size": 64,
+          "selected": false,
+          "skewX": 0
+        },
+        {
+          "TextBox": {},
+          "x": 566,
+          "y": 304,
+          "scale": {
+            "x": 1,
+            "y": 1
+          },
+          "type": "TextBox",
+          "size": 96,
+          "text": "<font face=\"FZHei-B01, sans-serif\"><a href=\"http://null\"><font color=\"#000000\" target=\"_blank\">中文</font><br><font color=\"#000000\">高温</font></a></font><br>",
+          "selected": false,
+          "skewX": 0
+        }
+      ],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 0,
+      "selected": true,
+      "active": true,
+      "x": 180,
+      "y": 180,
+      "background": "img:https://i.imgur.com/obo44wT.jpg",
+      "markdown": ""
+    },
+    {
+      "components": [],
+      "z": 0,
+      "impScale": 3,
+      "rotateX": 0,
+      "rotateY": 0,
+      "rotateZ": 0,
+      "index": 1,
+      "selected": false,
+      "active": false,
+      "background": "img:https://i.imgur.com/uLIPJnO.jpg",
+      "x": 272,
+      "y": 383
+    }
+  ],
+  "activeSlide": {
+    "components": [
+      {
+        "TextBox": {},
+        "x": 60,
+        "y": 967,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "text": "<font style=\"\" color=\"#eeeeee\"><font face=\"chenwixun-fan, sans-serif\">字幕字</font><font face=\"FZHei-B01, sans-serif\">幕</font><font face=\"chenwixun-fan, sans-serif\">转换之后行不行啊，好丑</font></font><br>",
+        "size": 64,
+        "selected": false,
+        "skewX": 0
+      },
+      {
+        "TextBox": {},
+        "x": 566,
+        "y": 304,
+        "scale": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "TextBox",
+        "size": 96,
+        "text": "<font face=\"FZHei-B01, sans-serif\"><a href=\"http://null\"><font color=\"#000000\" target=\"_blank\">中文</font><br><font color=\"#000000\">高温</font></a></font><br>",
+        "selected": false,
+        "skewX": 0
+      }
+    ],
+    "z": 0,
+    "impScale": 3,
+    "rotateX": 0,
+    "rotateY": 0,
+    "rotateZ": 0,
+    "index": 0,
+    "selected": true,
+    "active": true,
+    "x": 180,
+    "y": 180,
+    "background": "img:https://i.imgur.com/obo44wT.jpg",
+    "markdown": ""
+  },
+  "fileName": "test",
+  "deckVersion": "1.0",
+  "customBackgrounds": {
+    "bgs": []
+  }
+}
