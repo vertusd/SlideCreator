@@ -1,0 +1,24 @@
+<div class="btn-group">
+	<button class="btn btn-inverse dropdown-toggle btn-small fontFamilyBtn" data-toggle="dropdown" title="Choose the font family"><span class="text">Lato</span><span class="caret"></span></button>
+	<ul class="dropdown-menu menuBarOption" data-option="fontFamily">
+		<li>
+
+                  <a class="lato" href="#" data-value="'Lato', sans-serif">Lato</a>
+                  <a class="SingYi" href="#" data-value="chenwixun-fan, sans-serif ">钟齐陈伟勋硬笔行楷繁</a>
+                  <a class="FZHei-B01" href="#" data-value="FZHei-B01, sans-serif ">方正黑体</a>
+                 
+                  <a class="pmingliu" href="#" data-value="PMingLiU, sans-serif ">新細明體</a>
+                  <a class="mingliu" href="#" data-value="'MingLiU', sans-serif">細明體</a>
+                  <a class="jhenghei" href="#" data-value="'Microsoft JhengHei', sans-serif">微软正黑</a>
+                  <a class="yahei" href="#" data-value="'Microsoft YaHei', sans-serif">微软雅黑</a>
+                  <a class="leaguegothic" href="#" data-value="'League Gothic', sans-serif">League Gothic</a>
+                  <a class="droidsansmono" href="#" data-value="'Droid Sans Mono', monospace">Droid Sans Mono</a>
+                  <a class="ubuntu" href="#" data-value="'Ubuntu', sans-serif">Ubuntu</a>
+                  <a class="abril" href="#" data-value="'Abril Fatface', cursive">Abril</a>
+                  <a class="hammersmith" href="#" data-value="'Hammersmith One', sans-serif">Hammersmith One</a>
+                  <a class="fredoka" href="#" data-value="'Fredoka One', cursive">Fredoka One</a>
+                  <a class="gorditas" href="#" data-value="'Gorditas', cursive">Gorditas</a>
+                  <a class="pressstart" href="#" data-value="'PressStart2P', cursive">Press Start 2P</a>
+		</li>
+	</ul>
+</div>
