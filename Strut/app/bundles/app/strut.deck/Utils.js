@@ -97,6 +97,21 @@ define(function() {
 				$el.css('background-image', '');
 				$el.addClass(bg);
 			}
+		},
+
+		applyPanBackground: function($el, slide, deck, opts) {
+			this.removeCurrentBackground($el);
+			var bg = this.slideBackground(slide, deck, opts);
+			if (bg.indexOf('img:') == 0) {
+				$el.css('background-image', 'url(' + bg.substring(4) + ')');
+				$el.css('background-position-x', '0');
+				$el.css('background-position-y', '0');
+				$el.css('background-size', '100%');
+
+			} else {
+				$el.css('background', '');
+				$el.addClass(bg);
+			}
 		}
 	};
 });

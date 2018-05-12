@@ -20,6 +20,7 @@ function(Backbone, Header, CustomBgStylesheet) {
 				this.$el.append(activeMode.view.render().$el);
 			else
 				this._renderNoMode();
+			
 
 			return this;
 		},

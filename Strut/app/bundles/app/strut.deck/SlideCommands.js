@@ -94,6 +94,7 @@ define(['strut/deck/Slide'], function(Slide) {
 			this.deck.trigger('slideMoved');
 		},
 
+
 		name: "Move Slide"
 	};
 
@@ -101,6 +102,11 @@ define(['strut/deck/Slide'], function(Slide) {
 		Add: Add,
 		Remove: Remove,
 		Move: Move,
-
+		Focus:  function(initial, component) {
+			return new BaseCommand(initial, component, 'focus', 'Focus');
+		},
+		UnFocus:  function(initial, component) {
+			return new BaseCommand(initial, component, 'unFocus', 'UnFocus');
+		}
 	};
 });

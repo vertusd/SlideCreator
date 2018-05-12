@@ -49,7 +49,7 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 			this.$el.html(this._$slideContainer);
 			this._$slideContainer.css(config.slide.size);
 
-			DeckUtils.applyBackground(this._$slideContainer, this.model, this._deck, {transparentForSurface: true, surfaceForDefault: true, transparentForDeckSurface: true});
+			DeckUtils.applyPanBackground(this._$slideContainer, this.model, this._deck, {transparentForSurface: true, surfaceForDefault: true, transparentForDeckSurface: true});
 			this._$markdownContent = $('<div class="markdownArea themedArea"></div>');
 			this._$slideContainer.append(this._$markdownContent);
 
@@ -71,6 +71,14 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 			}, 0);
 
 			this.$el.addClass((this._deck.get('surface') || 'bg-default'));
+			//增加鼠标滚动检测
+            var $temp = this.$el.find('.slideContainer');
+            
+            //alert(this.model.attributes.startTime);
+            $temp[0].addEventListener("mousewheel", MouseWheelHandler, false); 
+            $temp[0].addEventListener("mousemove", MouseMoveHandler, false); 
+            $temp[0].addEventListener("ondblclick", MouseDBCLICKHandler, false); 
+            
 
 			return this;
 		},
@@ -79,7 +87,7 @@ function(Backbone, empty, ComponentFactory, GlobalEvents, Component,
 			if (!this._$slideContainer) return;
 			this._$slideContainer.removeClass();
 			this._$slideContainer.addClass('slideContainer ui-selectable');
-			DeckUtils.applyBackground(this._$slideContainer, this.model, this._deck, {transparentForSurface: true, surfaceForDefault: true});
+			DeckUtils.applyPanBackground(this._$slideContainer, this.model, this._deck, {transparentForSurface: true, surfaceForDefault: true});
 		},
 
 		_updateSurface: function(model, bg) {

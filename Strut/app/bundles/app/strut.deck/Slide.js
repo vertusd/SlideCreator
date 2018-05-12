@@ -74,6 +74,8 @@ define(["libs/backbone",
 						this._selectionChanged(comp, true, { multiselect: true });
 					}
 				}, this);
+
+
 			},
 
 			/**
