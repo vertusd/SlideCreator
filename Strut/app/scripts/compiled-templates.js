@@ -536,7 +536,7 @@ function program7(depth0,data,depth1,depth3) {
   if (stack2 = helpers.index) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.index; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "\" style=\"width: 1024px; height: 768px;\">\r\n			<div class=\"themedArea\">\r\n			";
+    + "\" style=\"width: 1920px; height: 1080px;\">\r\n			<div class=\"themedArea\">\r\n			";
   options = {hash:{},inverse:self.noop,fn:self.program(8, program8, data),data:data};
   stack2 = ((stack1 = helpers.marked || depth0.marked),stack1 ? stack1.call(depth0, depth0.markdown, options) : helperMissing.call(depth0, "marked", depth0.markdown, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
@@ -1218,7 +1218,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"overlay\"></div>\r\n<div class=\"slideDrawer slideContainer\"></div>\r\n<span class=\"close-btn-red-20 removeBtn\" title=\"Remove\"></span>\r\n<span class=\"badge badge-inverse\"> </span>";
+  return "<div class=\"overlay\"></div>\r\n<div class=\"slideDrawer slideContainer\"></div>\r\n<span class=\"close-btn-red-20 removeBtn\" title=\"Remove\"></span>\r\n<span class=\"badge_time badge-inverse\"></span>\r\n<span class=\"badge badge-inverse\"> </span>\r\n";
   });
 
 this["JST"]["strut.slide_snapshot/TransitionSlideSnapshot"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -1247,7 +1247,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack1 = helpers.impScale) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.impScale; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\"/>\r\n</div>\r\n<span class=\"badge badge-inverse\"> </span>\r\n";
+    + "\"/>\r\n\r\n</div>\r\n\r\n\r\n<span class=\"badge badge-inverse\"> </span>\r\n";
   return buffer;
   });
 

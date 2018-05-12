@@ -60,7 +60,14 @@ define(["libs/backbone",
 				_.defaults(this.attributes, defaults);
 				this.on("unrender", this.unrendered, this);
 				this.on('change:markdown', this._contentsChanged, this);
-
+				if (this.attributes.startTime === undefined)
+				{
+					this.attributes.startTime = 0;
+				}
+				if (this.attributes.endTime === undefined)
+				{
+					this.attributes.endTime = 0;
+				}
 				components = this.get('components');
 				components.forEach(function(comp) {
 					if (comp.get('selected')) {

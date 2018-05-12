@@ -31,6 +31,7 @@ define(['libs/backbone',
 				this.model.on('change:surface', this._bgChanged, this);
 				this.options.deck.on('change:background', this._bgChanged, this);
 				this.options.deck.on('change:surface', this._bgChanged, this);
+				
 
 				this._template = JST['strut.slide_snapshot/SlideSnapshot'];
 			},
@@ -121,7 +122,10 @@ define(['libs/backbone',
 				if (this.model.get('active')) {
 					this.$el.addClass('active');
 				}
-
+                var $temp = this.$el.find('.badge_time');
+                //alert(this.model.attributes.endTime);
+                //alert(this.model.attributes.startTime);
+				$temp[0].innerText= (this.model.attributes.endTime - this.model.attributes.startTime) + "s";
 				this._bgChanged();
 
 				return this;

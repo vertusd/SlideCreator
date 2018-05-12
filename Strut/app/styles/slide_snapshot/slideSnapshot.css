@@ -29,6 +29,17 @@
 	left: -7px;
 }
 
+.slideSnapshot .badge_time {
+	/*-webkit-transform-origin: 50% 50%;
+	-moz-transform-origin: 50% 50%;
+	-webkit-transform: scale(0.5);
+	-moz-transform: scale(0.5);*/
+	position: absolute;
+	bottom: -7px;
+	right: -7px;
+	
+}
+
 .slideSnapshot {
 	border: 2px solid grey;
 }

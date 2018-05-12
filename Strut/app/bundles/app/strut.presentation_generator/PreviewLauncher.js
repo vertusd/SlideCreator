@@ -20,6 +20,7 @@ define(function() {
 				surface: this._editorModel.deck().get('surface')
 			}));
 
+
 			window.previewWind = window.open(
 				'preview_export/' + generator.id + '.html' + generator.getSlideHash(this._editorModel),
 				window.location.href);

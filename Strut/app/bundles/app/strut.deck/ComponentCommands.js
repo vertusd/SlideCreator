@@ -143,7 +143,7 @@ define(function() {
 		},
 		StartTime:  function(initial, component) {
 			return new BaseCommand(initial, component, 'startTime', 'StartTime');
-		}
+		},
 		EndTime:  function(initial, component) {
 			return new BaseCommand(initial, component, 'endTime', 'EndTime');
 		}

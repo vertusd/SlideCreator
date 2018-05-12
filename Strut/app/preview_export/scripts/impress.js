@@ -205,8 +205,8 @@ var innerBg = document.querySelector('.innerBg');
     
     // some default config values.
     var defaults = {
-        width: 1024,
-        height: 768,
+        width: 1920,
+        height: 1080,
         maxScale: 1,
         minScale: 0,
         

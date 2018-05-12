@@ -93,12 +93,14 @@ define(['strut/deck/Slide'], function(Slide) {
 
 			this.deck.trigger('slideMoved');
 		},
+
 		name: "Move Slide"
 	};
 
 	return {
 		Add: Add,
 		Remove: Remove,
-		Move: Move
+		Move: Move,
+
 	};
 });

@@ -5549,6 +5549,20 @@ a.thumbnail:hover {
   background-color: #999999;
 }
 
+.badge_time {
+  display: inline-block;
+  padding: 2px 4px;
+  font-size: 11.844px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #999999;
+}
+
+
 .label {
   -webkit-border-radius: 3px;
      -moz-border-radius: 3px;
@@ -5562,6 +5576,15 @@ a.thumbnail:hover {
      -moz-border-radius: 9px;
           border-radius: 9px;
 }
+
+.badge_time {
+  padding-right: 9px;
+  padding-left: 9px;
+  -webkit-border-radius: 9px;
+     -moz-border-radius: 9px;
+          border-radius: 9px;
+}
+
 
 .label:empty,
 .badge:empty {
