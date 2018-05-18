@@ -15,7 +15,7 @@
       <td ><a>{{.}}</a></td>
       <td>Mark</td>
       <td>Otto</td>
-      <td><button class="close pull-right">×</button></td>
+      <td><button class="close  pull-left">×</button></td>
     </tr>
 	{{/files.data}}
   </tbody>
