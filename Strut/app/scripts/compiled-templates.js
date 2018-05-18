@@ -1491,26 +1491,66 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 this["JST"]["tantaman.web.widgets/FileBrowser"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, options, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
+  var buffer = "", stack1, stack2, functionType="function", escapeExpression=this.escapeExpression, self=this, blockHelperMissing=helpers.blockHelperMissing;
 
 function program1(depth0,data) {
   
   var buffer = "";
-  buffer += "\r\n	<li data-fileName=\""
+  buffer += "\r\n      <tr data-fileName=\""
     + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "\"><a>"
+    + "\">\r\n      <td ><a>"
     + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + " <button class=\"close pull-right\">×</button></a></li>\r\n	";
+    + "</a></td>\r\n      <td>Mark</td>\r\n      <td>Otto</td>\r\n      <td><button class=\"close pull-right\">×</button></td>\r\n    </tr>\r\n	";
   return buffer;
   }
 
-  buffer += "<input type=\"text\" class=\"fileName\"></input>\r\n<ul class=\"nav nav-pills nav-stacked\">\r\n	";
-  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data};
-  if (stack1 = helpers.files) { stack1 = stack1.call(depth0, options); }
-  else { stack1 = depth0.files; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  if (!helpers.files) { stack1 = blockHelperMissing.call(depth0, stack1, options); }
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n</ul>";
+function program3(depth0,data) {
+  
+  var buffer = "", stack1, stack2;
+  buffer += "\r\n  ";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.files),stack1 == null || stack1 === false ? stack1 : stack1.hasprev), {hash:{},inverse:self.program(6, program6, data),fn:self.program(4, program4, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\r\n  ";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.files),stack1 == null || stack1 === false ? stack1 : stack1.hasnext), {hash:{},inverse:self.program(10, program10, data),fn:self.program(8, program8, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\r\n";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  
+  return "\r\n    <li class=\"page-item \" ><a href=\"#\" class=\"page-link prev\">previous</a></li>\r\n  ";
+  }
+
+function program6(depth0,data) {
+  
+  
+  return "\r\n    <li class=\"page-item disabled\" ><a href=\"#\" class=\"page-link\">previous</a></li>\r\n  ";
+  }
+
+function program8(depth0,data) {
+  
+  
+  return "\r\n    <li class=\"page-item\"><a href=\"#\" class=\"page-link next\">next</a></li>\r\n  ";
+  }
+
+function program10(depth0,data) {
+  
+  
+  return "\r\n    <li class=\"page-item disabled\" ><a href=\"#\" class=\"page-link\">next</a></li>\r\n  ";
+  }
+
+  buffer += "<input type=\"text\" class=\"fileName\"></input>\r\n\r\n<table class=\"table table-striped table-dark\">\r\n <thead>\r\n    <tr>\r\n      <th scope=\"col\">名称</th>\r\n      <th scope=\"col\">时间</th>\r\n      <th scope=\"col\">歌手</th>\r\n      <th scope=\"col\">删除</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n     ";
+  stack2 = ((stack1 = ((stack1 = ((stack1 = depth0.files),stack1 == null || stack1 === false ? stack1 : stack1.data)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1)),blockHelperMissing.call(depth0, stack1, {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data}));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\r\n  </tbody>\r\n</table>\r\n<div>\r\n<div class=\"pagination pull-left\" style=\"margin:0px\">\r\n  <ul class=\"\">\r\n";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.files),stack1 == null || stack1 === false ? stack1 : stack1.gtzero), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\r\n   </ul>\r\n</div>\r\n<div class=\"pull-right\"  style=\"margin:0px\">"
+    + escapeExpression(((stack1 = ((stack1 = depth0.files),stack1 == null || stack1 === false ? stack1 : stack1.currentPage)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + " of "
+    + escapeExpression(((stack1 = ((stack1 = depth0.files),stack1 == null || stack1 === false ? stack1 : stack1.totalPages)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</div>\r\n</div>";
   return buffer;
   });
 
