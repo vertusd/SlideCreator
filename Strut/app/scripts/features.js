@@ -19,8 +19,8 @@ define([
 	'strut/transition_editor/main',
 	'strut/slide_components/main',
 	'strut/well_context_buttons/main',
-	'tantaman/web/local_storage/main',
-	// 'tantaman/web/remote_storage/main',
+	//'tantaman/web/local_storage/main',
+	'tantaman/web/remote_storage/main',
 	'strut/startup/main'
 	],
 function(ServiceRegistry) {

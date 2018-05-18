@@ -187,7 +187,7 @@ define([
         var oldValue = node.data;
 
         node.data = data;
-
+        timestamp = parseInt(timestamp);
         if(! outgoing) {
           if(typeof(timestamp) !== 'number') {
             throw "Attempted to set non-number timestamp in incoming change: " + timestamp + ' (' + typeof(timestamp) + ') at path ' + path;
