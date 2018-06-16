@@ -23,13 +23,13 @@
     function extract_text(lrc_line) {
         var patt_tag = /\[[0-9.:]+\]/g;
         var text_line = lrc_line.replace(patt_tag, "");
-        """
+     
         text_line = transverter({
 					type:'traditional',
 					str:text_line,
 					language:"zh_TW"
 				});
-        """
+
         return(text_line);
     }
 
@@ -41,6 +41,14 @@
         var patt = /[0-9]+/g;
         var result = lrc_line.match(patt);
         var value = 0;
+        $.writeln("result is :")
+        $.writeln( result);
+        $.writeln("line is " + lrc_line);
+        if (result == null)
+        {  
+             return null;
+        }
+       
         if (result[2] >100){
             value = result[2]/1000;
         }else{
@@ -225,11 +233,13 @@
     {
         var layers = actiItem.layers;
         var width = Math.floor(title_text.length / 2);
+     
         title_text = transverter({
             type:'traditional',
             str:title_text,
             language:"zh_TW"
         });
+     
         var text  = toVerticalText(title_text,false,width);
         var temp_obj = layers.addText(text);
         temp_obj.name = "Imported with SlideCreator Title";
@@ -239,21 +249,26 @@
          if (is_title)
         {
 
-               textDocument.fontSize = Math.floor(180/width) ;
+               textDocument.fontSize = Math.floor(300/width) ;
                textDocument.font = "FZYTK--GBK1-0";
+               textDocument.font = "NotoSansCJKtc-Light";
+               
 
 
         }
          else
          {
               textDocument.fontSize = 60 ;
-               textDocument.font = "chenwixun-fan";
+               //textDocument.font = "chenwixun-fan";
+               textDocument.font ="Wyue-GutiFangsong-NC";
+               textDocument.font = "NotoSansCJKtc-Light";
          }
        
         textDocument.fillColor = [1,1,1];
         textDocument.strokeColor = [0, 0, 0];
         textDocument.strokeWidth = 2;
-       
+        textDocument.strokeOverFill = false;
+        textDocument.applyStroke = true;
         textProp.setValue(textDocument);
         var myRect = temp_obj.sourceRectAtTime(0,false);
         if (is_title)
@@ -344,7 +359,7 @@
     wave.property("ADBE AudSpect-0001").setValue(mp3LayerIndex);
     wave.property("ADBE AudSpect-0002").setValue(wavePositionS);
     wave.property("ADBE AudSpect-0003").setValue(wavePositionE);
-    wave.property("ADBE AudSpect-0009").setValue(8000);
+    wave.property("ADBE AudSpect-0009").setValue(500);
     wave.property("ADBE AudSpect-0012").setValue(6);
     wave.property("ADBE AudSpect-0014").setValue(color);
     wave.property("ADBE AudSpect-0015").setValue(color);
@@ -374,7 +389,7 @@
     app.newProject()
     app.beginUndoGroup("Start...");
     var panZoomStart = 0; // in seconds
-    var panZoomEnd = 3;
+    var panZoomEnd = 1.5;
 
     var defaultFolder;
     if (defaultFolder == null)
@@ -386,8 +401,11 @@
     if (month >= 1 && month <= 9) {
         month = "0" + month;
     }
-
-    var dateStr  = date.getFullYear().toString ()+month+date.getDate().toString ()+"_02";
+    var date_str = date.getDate().toString () ;
+    if (date_str >= 1 && date_str <= 9) {
+        date_str = "0" + date_str;
+    }
+    var dateStr  = date.getFullYear().toString ()+month+date_str;
     path = "d:\\Project\\AE\\sources\\"+dateStr;
     var imageFolder = new Folder(path);
 
@@ -395,7 +413,7 @@
     var actiItem = app.project.activeItem;
     
     var duration = getAudioLength(path+"\\mp3.mp3");
-    actiItem = buildImageCompose(app,imageFolder,duration,4)
+    actiItem = buildImageCompose(app,imageFolder,duration,1)
     var layers = actiItem.layers;
     var  lrc_file = new File(path+"\\lrc.lrc");
     
@@ -417,6 +435,10 @@
             lrc_line = lrc_file.readln();
             // line operation
             if (!is_empty_line(lrc_line)) {
+                if(lrc_line == "" || lrc_line.length <2)
+                {
+                    continue;
+                }
                 var markerIn = new MarkerValue("IN");
                 var markerOut = new MarkerValue("OUT");
                 text_obj.outPoint = extract_time(lrc_line);     // outPoint of last layer
@@ -445,7 +467,7 @@
                 textDocument.applyStroke = true;
                 //textDocument.applyFill = true;
                 textDocument.font = "HYi2gj"; 
-
+                textDocument.font ="SimSun";
                 textProp.setValue(textDocument);
                 text_obj.property("Source Text").setValue(textDocument);
             }
@@ -454,9 +476,9 @@
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
 
 
-    var title_text = "梦中的哈德森啊";
+    var title_text = "学猫叫";
     addTitleText(actiItem,title_text,true);
-    var author_text = "赵雷"
+    var author_text = "小潘潘小峰峰"
     addTitleText(actiItem,author_text,false);
 
 
