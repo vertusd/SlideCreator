@@ -75,8 +75,42 @@
             img_obj.outPoint=chip*(i);
         }
     }
+    function getItem(itemName, itemInstanceName, locationObject) {
+        if (locationObject.numItems > 0) {
+            for (var i = 1; i <= locationObject.numItems; i ++) {
+                var curItem = locationObject.item(i);
+                if (curItem.name === itemName) {
+                    if (curItem instanceof itemInstanceName || (curItem.mainSource !== "undefined" && curItem.mainSource instanceof itemInstanceName)) {
+                        return curItem;
+                    }
+                }
+            }
+        }
+        return null;
+    }
 
-   
+   function addLogo(layers, actiItem){
+                var logofanai_footage = getItem("logofan.ai", FileSource,  app.project.rootFolder);
+                    if (logofanai_footage === null) {
+                        var logofanai_path = "~/Creative Cloud Files/logofan.ai";
+                        var logofanai_importOptions = new ImportOptions(new File(logofanai_path));
+                        var logofanai_footage = app.project.importFile(logofanai_importOptions);
+                            logofanai_footage.label = 5;
+                            logofanai_footage.selected = false;
+                    }
+
+                // Working with comp "Final - 20180617", varName "final20180617_comp";
+                    actiItem.openInViewer();
+                    // Add existing footage item "logofan.ai", varName "logofanai_footage";
+                    var logofanai = layers.add(logofanai_footage);
+                        logofanai.moveToEnd();
+                        logofanai.property("ADBE Transform Group").property("ADBE Position").setValue([1754,960,0]);
+                        logofanai.property("ADBE Transform Group").property("ADBE Scale").setValue([30,30,100]); 
+                        logofanai.moveToBeginning();
+                       
+                       
+       
+       }
     // ============================================================================
     // Function: add image with animation
     // ============================================================================
@@ -251,7 +285,7 @@
 
                textDocument.fontSize = Math.floor(300/width) ;
                textDocument.font = "FZYTK--GBK1-0";
-               textDocument.font = "NotoSansCJKtc-Light";
+               textDocument.font = "ArialUnicodeMS";
                
 
 
@@ -261,14 +295,14 @@
               textDocument.fontSize = 60 ;
                //textDocument.font = "chenwixun-fan";
                textDocument.font ="Wyue-GutiFangsong-NC";
-               textDocument.font = "NotoSansCJKtc-Light";
+               textDocument.font = "ArialUnicodeMS";
          }
        
         textDocument.fillColor = [1,1,1];
         textDocument.strokeColor = [0, 0, 0];
         textDocument.strokeWidth = 2;
         textDocument.strokeOverFill = false;
-        textDocument.applyStroke = true;
+        textDocument.applyStroke = false;
         textProp.setValue(textDocument);
         var myRect = temp_obj.sourceRectAtTime(0,false);
         if (is_title)
@@ -282,7 +316,12 @@
         
         var myY = myPos[1] + myRect.top + myRect.height/2;
         var deltaY = actiItem.height/2 - myY;
+        actiItem.openInViewer();
+        temp_obj.selected = true;
+        app.executeCommand(app.findMenuCommandId("Outer Glow"));
         temp_obj.property("Position").setValue(myPos + [0,deltaY]);
+        temp_obj.property("ADBE Layer Styles").property(4).property("outerGlow/opacity").setValue(20);
+        temp_obj.property("ADBE Layer Styles").property(4).property("outerGlow/color").setValue([0.98039215803146,0.98039215803146,0.84582853317261,1]);
     }
     
     
@@ -430,6 +469,7 @@
     text_obj.name = "Imported with SlideCreator";
     if(lrc_file.exists) {
         lrc_file.open("r","TEXT","????");
+        
         while(!(lrc_file.eof)) {
             // read next line
             lrc_line = lrc_file.readln();
@@ -464,21 +504,34 @@
                 textDocument.font = "chenwixun-fan"; 
                 textDocument.strokeWidth = 2;
                 textDocument.strokeOverFill = false;
-                textDocument.applyStroke = true;
+                textDocument.applyStroke = false;
                 //textDocument.applyFill = true;
                 textDocument.font = "HYi2gj"; 
                 textDocument.font ="SimSun";
                 textProp.setValue(textDocument);
                 text_obj.property("Source Text").setValue(textDocument);
+                actiItem.openInViewer();
+                text_obj.selected = true;
+                app.executeCommand(app.findMenuCommandId("Outer Glow"));
+                 var hao1 = text_obj.property("ADBE Layer Styles");
+                 var hao2 = hao1.property(4);
+                 var hao3 =  hao2.property("outerGlow/opacity");
+                 if (hao1.canSetEnabled && hao1.canSetEnabled  && hao3.canSetEnabled)
+                 {
+                     $.writeln("can set opacity!");
+                     text_obj.property("ADBE Layer Styles").property(4).property("outerGlow/opacity").setValue(20);
+                     text_obj.property("ADBE Layer Styles").property(4).property("outerGlow/color").setValue([0.98039215803146,0.98039215803146,0.84582853317261,1]);
+                 }
+
             }
         }
     }
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
 
 
-    var title_text = "学猫叫";
+    var title_text = "專屬天使";
     addTitleText(actiItem,title_text,true);
-    var author_text = "小潘潘小峰峰"
+    var author_text = "Tank"
     addTitleText(actiItem,author_text,false);
 
 
@@ -486,7 +539,10 @@
     
     addMusicWave(layers,mp3Layer.index+1);
     
+    addLogo(layers,actiItem);
+    
+    app.endUndoGroup();
     app.project.save(new File(path + '/' + dateStr + ".aep"));
     $.writeln("Completed!");
-    app.endUndoGroup();
+    
 }
