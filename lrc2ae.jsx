@@ -428,7 +428,7 @@
     app.newProject()
     app.beginUndoGroup("Start...");
     var panZoomStart = 0; // in seconds
-    var panZoomEnd = 1.5;
+    var panZoomEnd = 1.2;
 
     var defaultFolder;
     if (defaultFolder == null)
@@ -529,9 +529,9 @@
     text_obj.outPoint = text_obj.outPoint - extract_time(lrc_line);
 
 
-    var title_text = "專屬天使";
+    var title_text = "小流星";
     addTitleText(actiItem,title_text,true);
-    var author_text = "Tank"
+    var author_text = "汪蘇瀧/吳映潔"
     addTitleText(actiItem,author_text,false);
 
 
